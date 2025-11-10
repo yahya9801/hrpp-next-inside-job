@@ -81,7 +81,11 @@ export default async function Page({
         <div className="flex flex-col gap-1">
           <h1 className="text-3xl font-bold text-gray-800">{job.job_title}</h1>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between gap-3 w-full sm:w-auto sm:justify-end">
+          <JobViewTracker
+            jobId={jobId}
+            className="text-sm text-gray-500 whitespace-nowrap"
+          />
           <ShareButton title={job.job_title} />
         </div>
         <SchemaMarkup schema={schema} />
@@ -96,23 +100,17 @@ export default async function Page({
         </span>
   
         {/* Status Badge on the right */}
-        <div className="flex flex-col items-end gap-1 ml-4 sm:flex-row sm:items-center">
-          <span
-            className={`px-2 py-1 rounded-full font-medium ${
-              job.expiry_date && new Date(job.expiry_date) >= new Date()
-                ? "bg-green-100 text-green-700 border border-green-300"
-                : "bg-red-100 text-red-700 border border-red-300"
-            }`}
-          >
-            {job.expiry_date && new Date(job.expiry_date) >= new Date()
-              ? "Active"
-              : "Expired"}
-          </span>
-          <JobViewTracker
-            jobId={jobId}
-            className="text-xs text-gray-500 sm:text-sm sm:ml-3"
-          />
-        </div>
+        <span
+          className={`px-2 py-1 rounded-full font-medium ml-4 ${
+            job.expiry_date && new Date(job.expiry_date) >= new Date()
+              ? "bg-green-100 text-green-700 border border-green-300"
+              : "bg-red-100 text-red-700 border border-red-300"
+          }`}
+        >
+          {job.expiry_date && new Date(job.expiry_date) >= new Date()
+            ? "Active"
+            : "Expired"}
+        </span>
       </div>
   
       <p>
