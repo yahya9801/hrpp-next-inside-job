@@ -15,6 +15,8 @@ const SCRIPT_LOADED_ATTR = "data-adsbygoogle-loaded";
 
 const InArticleAd = ({ slotId = "8015069158", className }: InArticleAdProps) => {
   const adRef = useRef<HTMLModElement | null>(null);
+  const retryTimeoutRef = useRef<number | null>(null);
+  const hasRequestedAdRef = useRef(false);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -27,18 +29,46 @@ const InArticleAd = ({ slotId = "8015069158", className }: InArticleAdProps) => 
       return;
     }
 
+    hasRequestedAdRef.current = false;
     adElement.innerHTML = "";
     adElement.removeAttribute("data-adsbygoogle-status");
 
-    const requestAd = () => {
+    function clearRetryTimeout() {
+      if (retryTimeoutRef.current) {
+        window.clearTimeout(retryTimeoutRef.current);
+        retryTimeoutRef.current = null;
+      }
+    }
+
+    function scheduleRetry(delay = 200) {
+      clearRetryTimeout();
+      retryTimeoutRef.current = window.setTimeout(() => {
+        requestAd();
+      }, delay);
+    }
+
+    function requestAd() {
+      if (hasRequestedAdRef.current || !adRef.current) {
+        return;
+      }
+
+      const width = adRef.current.offsetWidth;
+
+      if (width === 0) {
+        scheduleRetry();
+        return;
+      }
+
       try {
         (window.adsbygoogle = window.adsbygoogle || []).push({});
+        hasRequestedAdRef.current = true;
       } catch (error) {
         console.error("AdSense push error:", error);
+        scheduleRetry(1000);
       }
-    };
+    }
 
-    const handleScriptLoad = (script: HTMLScriptElement) => {
+    const handleScriptReady = (script: HTMLScriptElement) => {
       script.setAttribute(SCRIPT_LOADED_ATTR, "true");
       requestAd();
     };
@@ -52,20 +82,17 @@ const InArticleAd = ({ slotId = "8015069158", className }: InArticleAdProps) => 
       (trackedScript.getAttribute(SCRIPT_LOADED_ATTR) === "true" ||
         typeof window.adsbygoogle !== "undefined");
 
-    if (isScriptLoaded) {
-      requestAd();
-      return;
-    }
-
     const onScriptLoad = () => {
       if (!trackedScript) {
         return;
       }
 
-      handleScriptLoad(trackedScript);
+      handleScriptReady(trackedScript);
     };
 
-    if (trackedScript) {
+    if (isScriptLoaded) {
+      requestAd();
+    } else if (trackedScript) {
       trackedScript.addEventListener("load", onScriptLoad, { once: true });
     } else {
       trackedScript = document.createElement("script");
@@ -76,7 +103,17 @@ const InArticleAd = ({ slotId = "8015069158", className }: InArticleAdProps) => 
       document.head.appendChild(trackedScript);
     }
 
+    const handleResize = () => {
+      if (!hasRequestedAdRef.current) {
+        requestAd();
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
     return () => {
+      clearRetryTimeout();
+      window.removeEventListener("resize", handleResize);
       trackedScript?.removeEventListener("load", onScriptLoad);
     };
   }, [slotId]);
