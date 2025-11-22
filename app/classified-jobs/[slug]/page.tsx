@@ -389,7 +389,7 @@ export default async function Page({
         </div>
       </div>
       <div className="space-y-3 text-sm text-gray-600">
-        <div className="flex items-center justify-between text-gray-600 gap-4">
+        <div className="flex items-center justify-between text-gray-600 gap-4 text-base md:text-lg">
           {/* Locations on the left */}
           <span className="m-0 inline-block">
             <strong>📍 Locations:</strong>{" "}
@@ -410,16 +410,16 @@ export default async function Page({
           </span>
         </div>
   
-        <p>
+        <p className="text-base md:text-lg">
           <strong>👨‍💼 Roles:</strong>{" "}
           {job.roles?.map((r: any) => r.name || r.text).join(", ") || "N/A"}
         </p>
-        <p>
+        <p className="text-base md:text-lg">
           <strong>👨‍💼 Experiences:</strong>{" "}
           {job.experiences?.map((r: any) => r.name || r.text).join(", ") || "N/A"}
         </p>
         {companyNames.length > 0 && (
-          <p>
+          <p className="text-base md:text-lg">
             <strong>🏢 Companies:</strong> {companyNames.join(", ")}
           </p>
         )}
