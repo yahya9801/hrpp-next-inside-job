@@ -34,6 +34,22 @@ export default function Footer() {
     { name: 'About Us', href: '/about-us' },
   ];
 
+  const popularDemandLinks = [
+    { name: 'Jobs in Karachi', href: '/jobs-in-karachi' },
+    { name: 'Jobs in Lahore', href: '/jobs-in-lahore' },
+    { name: 'Jobs in Rawalpindi', href: '/jobs-in-islamabad-rawalpindi' },
+    { name: 'Jobs in Islamabad', href: '/jobs-in-islamabad-rawalpindi' },
+    { name: 'Jobs in Faisalabad', href: '/jobs-in-faisalabad' },
+    {
+      name: 'Remote Jobs',
+      href: 'https://www.hrpostingpartner.com/classified-jobs?start=&end=&locations=Remote&experience=',
+    },
+    {
+      name: "Fresher's Jobs/Internships",
+      href: 'https://www.hrpostingpartner.com/classified-jobs?start=&end=&locations=&experience=Fresh+Required',
+    },
+  ];
+
   useEffect(() => {
     const controller = new AbortController();
 
@@ -71,7 +87,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-gray-900 text-white">
-      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
         {/* Logo Section */}
         <div className="space-y-6">
           <div className="flex items-center space-x-3">
@@ -174,6 +190,52 @@ export default function Footer() {
                 </Link>
               </li>
             ))}
+          </ul>
+        </div>
+
+        {/* Popular Demands */}
+        <div className="space-y-6">
+          <h4 className="text-lg font-semibold relative">
+            Popular Demands
+            <div className="absolute -bottom-2 left-0 w-12 h-0.5 bg-purple-500 rounded-full"></div>
+          </h4>
+          <ul className="space-y-3">
+            {popularDemandLinks.map((item, i) => {
+              const isExternal =
+                typeof item.href === 'string' && item.href.startsWith('http');
+
+              const content = (
+                <>
+                  <ChevronRight
+                    size={14}
+                    className="mr-2 text-gray-500 group-hover:text-purple-400 transition"
+                  />
+                  <span>{item.name}</span>
+                </>
+              );
+
+              return (
+                <li key={i}>
+                  {isExternal ? (
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center text-gray-300 hover:text-white text-sm transition"
+                    >
+                      {content}
+                    </a>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className="group flex items-center text-gray-300 hover:text-white text-sm transition"
+                    >
+                      {content}
+                    </Link>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </div>
 
