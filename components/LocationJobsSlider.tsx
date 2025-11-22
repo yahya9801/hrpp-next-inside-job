@@ -90,7 +90,7 @@ export default function LocationJobsSlider({
                     </span>
                   )}
                   <span className="inline-flex items-center gap-1 text-blue-600 font-semibold">
-                    View job ->
+                    View job &rarr;
                   </span>
                 </div>
               </div>
@@ -107,7 +107,7 @@ export default function LocationJobsSlider({
             const content = (
               <>
                 {seeMoreLabel}
-                <span aria-hidden="true">-></span>
+                <span aria-hidden="true">&rarr;</span>
               </>
             );
             const isExternal =
