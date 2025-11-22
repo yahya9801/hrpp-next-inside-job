@@ -19,7 +19,7 @@ export type LocationSliderJob = {
 
 type LocationJobsSliderProps = {
   jobs: LocationSliderJob[];
-  seeMoreHref?: LinkProps["href"];
+  seeMoreHref?: LinkProps["href"] | string;
   seeMoreLabel?: string;
 };
 
@@ -82,12 +82,6 @@ export default function LocationJobsSlider({
                   )}
                 </div>
 
-                {job.shortDescription && (
-                  <p className="text-sm text-gray-600 line-clamp-3">
-                    {job.shortDescription}
-                  </p>
-                )}
-
                 <div className="mt-auto flex items-center justify-between text-xs text-gray-500">
                   {job.postedAt && (
                     <span>
@@ -107,16 +101,40 @@ export default function LocationJobsSlider({
 
       {seeMoreHref && (
         <div className="mt-4 flex justify-end">
-          <Link
-            href={seeMoreHref}
-            className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700 transition hover:border-blue-300 hover:bg-blue-100"
-          >
-            {seeMoreLabel}
-            <span aria-hidden="true">-></span>
-          </Link>
+          {(() => {
+            const className =
+              "inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700 transition hover:border-blue-300 hover:bg-blue-100";
+            const content = (
+              <>
+                {seeMoreLabel}
+                <span aria-hidden="true">-></span>
+              </>
+            );
+            const isExternal =
+              typeof seeMoreHref === "string" &&
+              /^(https?:)?\/\//i.test(seeMoreHref);
+
+            if (isExternal) {
+              return (
+                <a
+                  href={seeMoreHref as string}
+                  className={className}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {content}
+                </a>
+              );
+            }
+
+            return (
+              <Link href={seeMoreHref} className={className}>
+                {content}
+              </Link>
+            );
+          })()}
         </div>
       )}
     </div>
   );
 }
-

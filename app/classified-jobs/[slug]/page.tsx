@@ -103,50 +103,94 @@ function getPrimaryLocation(job: RawRelatedJob): string | null {
   return label ? label : null;
 }
 
-function isKarachiJob(job: RawRelatedJob): boolean {
+function jobMatchesLocationKeyword(job: RawRelatedJob, keyword: string): boolean {
+  if (!keyword) return true;
   if (!Array.isArray(job.locations)) return false;
+  const normalizedKeyword = keyword.toLowerCase();
   return job.locations.some((loc) =>
-    normalizeLocationName(loc).toLowerCase().includes("karachi"),
+    normalizeLocationName(loc).toLowerCase().includes(normalizedKeyword),
   );
 }
 
-async function getKarachiJobs(limit = 5): Promise<LocationSliderJob[]> {
+type SliderFetchOptions = {
+  limit?: number;
+  locations?: string;
+  experience?: string;
+  requiredLocationKeyword?: string;
+  additionalQuery?: Record<string, string | undefined>;
+};
+
+type SliderSectionConfig = {
+  key: string;
+  title: string;
+  description?: string;
+  fetchOptions: SliderFetchOptions;
+  seeMoreHref?: string | { pathname: string; query?: Record<string, string> };
+  seeMoreLabel?: string;
+};
+
+async function fetchJobsForSlider({
+  limit = 5,
+  locations,
+  experience,
+  requiredLocationKeyword,
+  additionalQuery = {},
+}: SliderFetchOptions = {}): Promise<LocationSliderJob[]> {
+  const perPage = Math.max(limit + 3, 8);
   const params = new URLSearchParams({
-    locations: "Karachi",
     page: "1",
-    per_page: String(Math.max(limit, 5)),
+    per_page: String(perPage),
+  });
+
+  if (locations) {
+    params.set("locations", locations);
+  }
+
+  if (experience) {
+    params.set("experience", experience);
+  }
+
+  Object.entries(additionalQuery).forEach(([key, value]) => {
+    if (value) {
+      params.set(key, value);
+    }
   });
 
   try {
     const res = await fetch(
       `https://admin.hrpostingpartner.com/api/jobs?${params.toString()}`,
       {
-        next: { revalidate: 120 },
+        next: { revalidate: 60 * 60 * 6 },
       },
     );
 
     if (!res.ok) {
-      console.error("Failed to fetch Karachi jobs", res.statusText);
+      console.error("Failed to fetch jobs for slider", res.statusText);
       return [];
     }
 
     const data = await res.json();
     const jobs: RawRelatedJob[] = Array.isArray(data?.data) ? data.data : [];
 
-    return jobs
-      .filter((job) => Boolean(job.slug) && isKarachiJob(job))
-      .slice(0, limit)
-      .map((job) => ({
-        id: job.id ?? job.slug!,
-        slug: job.slug!,
-        title: job.title || job.job_title || "View job",
-        shortDescription: job.short_description ?? "",
-        imageUrl: resolveJobImageUrl(job),
-        locationLabel: getPrimaryLocation(job),
-        postedAt: job.posted_at ?? null,
-      }));
+    const filtered = jobs.filter((job) => {
+      if (!job.slug) return false;
+      if (requiredLocationKeyword) {
+        return jobMatchesLocationKeyword(job, requiredLocationKeyword);
+      }
+      return true;
+    });
+
+    return filtered.map((job) => ({
+      id: job.id ?? job.slug!,
+      slug: job.slug!,
+      title: job.title || job.job_title || "View job",
+      shortDescription: job.short_description ?? "",
+      imageUrl: resolveJobImageUrl(job),
+      locationLabel: getPrimaryLocation(job),
+      postedAt: job.posted_at ?? null,
+    }));
   } catch (error) {
-    console.error("Failed to fetch Karachi jobs", error);
+    console.error("Failed to fetch jobs for slider", error);
     return [];
   }
 }
@@ -181,10 +225,112 @@ export default async function Page({
         .map((company: any) => company?.name || company?.text)
         .filter(Boolean)
     : [];
-  const rawKarachiJobs = await getKarachiJobs(6);
-  const karachiJobs = rawKarachiJobs
-    .filter((related) => related.slug !== slug)
-    .slice(0, 5);
+  const sliderConfigs: SliderSectionConfig[] = [
+    {
+      key: "latest-pk",
+      title: "Latest jobs in Pakistan",
+      description: "Fresh openings curated from every province.",
+      fetchOptions: { limit: 5 },
+      seeMoreHref: "/classified-jobs",
+      seeMoreLabel: "Browse all jobs",
+    },
+    {
+      key: "latest-karachi",
+      title: "Latest jobs in Karachi",
+      description: "Hot roles hiring right now in Karachi.",
+      fetchOptions: {
+        limit: 5,
+        locations: "Karachi",
+        requiredLocationKeyword: "karachi",
+      },
+      seeMoreHref: { pathname: "/classified-jobs", query: { locations: "Karachi" } },
+      seeMoreLabel: "See more Karachi jobs",
+    },
+    {
+      key: "latest-lahore",
+      title: "Latest jobs in Lahore",
+      description: "Opportunities across Lahore’s top companies.",
+      fetchOptions: {
+        limit: 5,
+        locations: "Lahore",
+        requiredLocationKeyword: "lahore",
+      },
+      seeMoreHref: { pathname: "/classified-jobs", query: { locations: "Lahore" } },
+      seeMoreLabel: "See more Lahore roles",
+    },
+    {
+      key: "latest-islamabad",
+      title: "Latest jobs in Islamabad",
+      description: "Government and private roles in the capital.",
+      fetchOptions: {
+        limit: 5,
+        locations: "Islamabad",
+        requiredLocationKeyword: "islamabad",
+      },
+      seeMoreHref: { pathname: "/classified-jobs", query: { locations: "Islamabad" } },
+      seeMoreLabel: "See Islamabad jobs",
+    },
+    {
+      key: "latest-rawalpindi",
+      title: "Latest jobs in Rawalpindi",
+      description: "Fresh listings from the Pindi region.",
+      fetchOptions: {
+        limit: 5,
+        locations: "Rawalpindi",
+        requiredLocationKeyword: "rawalpindi",
+      },
+      seeMoreHref: { pathname: "/classified-jobs", query: { locations: "Rawalpindi" } },
+      seeMoreLabel: "See Rawalpindi jobs",
+    },
+    {
+      key: "latest-faisalabad",
+      title: "Latest jobs in Faisalabad",
+      description: "Manufacturing and tech roles in Faisalabad.",
+      fetchOptions: {
+        limit: 5,
+        locations: "Faisalabad",
+        requiredLocationKeyword: "faisalabad",
+      },
+      seeMoreHref: { pathname: "/classified-jobs", query: { locations: "Faisalabad" } },
+      seeMoreLabel: "See Faisalabad jobs",
+    },
+    {
+      key: "latest-remote",
+      title: "Latest Remote Jobs for Pakistan",
+      description: "Work-from-home and remote-friendly roles.",
+      fetchOptions: {
+        limit: 5,
+        locations: "Remote",
+        requiredLocationKeyword: "remote",
+      },
+      seeMoreHref:
+        "https://www.hrpostingpartner.com/classified-jobs?start=&end=&locations=Remote&experience=",
+      seeMoreLabel: "See more remote jobs",
+    },
+    {
+      key: "latest-freshers",
+      title: "Latest Fresher's Jobs/Internships",
+      description: "No-experience positions for students and grads.",
+      fetchOptions: {
+        limit: 5,
+        experience: "Fresh Required",
+      },
+      seeMoreHref:
+        "https://www.hrpostingpartner.com/classified-jobs?start=&end=&locations=&experience=Fresh+Required",
+      seeMoreLabel: "Explore freshers jobs",
+    },
+  ];
+
+  const sliderSections = (
+    await Promise.all(
+      sliderConfigs.map(async (config) => {
+        const fetched = await fetchJobsForSlider(config.fetchOptions);
+        const maxItems = config.fetchOptions.limit ?? 5;
+        const jobs = fetched.filter((item) => item.slug !== slug).slice(0, maxItems);
+        return { ...config, jobs };
+      }),
+    )
+  ).filter((section) => section.jobs.length > 0);
 
   const schema = {
     "@context": "https://schema.org",
@@ -378,25 +524,27 @@ export default async function Page({
         Note: Do not send your resume or contact us by phone.
       </p>
     </div>
-      {karachiJobs.length > 0 && (
-        <section className="mt-12">
-          <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h2 className="text-2xl font-semibold text-gray-900">
-                More jobs in Karachi
-              </h2>
-              <p className="text-sm text-gray-500">
-                Discover fresh openings similar to this role.
-              </p>
-            </div>
-          </div>
+      {sliderSections.length > 0 && (
+        <div className="mt-12 space-y-12">
+          {sliderSections.map((section) => (
+            <section key={section.key}>
+              <div className="mb-4">
+                <h2 className="text-2xl font-semibold text-gray-900">
+                  {section.title}
+                </h2>
+                {section.description && (
+                  <p className="text-sm text-gray-500">{section.description}</p>
+                )}
+              </div>
 
-          <LocationJobsSlider
-            jobs={karachiJobs}
-            seeMoreHref={{ pathname: "/classified-jobs", query: { locations: "Karachi" } }}
-            seeMoreLabel="See more Karachi jobs"
-          />
-        </section>
+              <LocationJobsSlider
+                jobs={section.jobs}
+                seeMoreHref={section.seeMoreHref}
+                seeMoreLabel={section.seeMoreLabel}
+              />
+            </section>
+          ))}
+        </div>
       )}
   </div>
 
