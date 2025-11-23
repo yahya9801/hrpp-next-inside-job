@@ -30,6 +30,7 @@ type RawRelatedJob = {
   job_title?: string;
   short_description?: string | null;
   posted_at?: string | null;
+  expiry_date?: string | null;
   image_path?: string | null;
   images?: Array<
     | string
@@ -44,7 +45,43 @@ type RawRelatedJob = {
         text?: string | null;
       }
   >;
+  roles?: Array<
+    | string
+    | {
+        name?: string | null;
+        text?: string | null;
+      }
+  >;
+  experiences?: Array<
+    | string
+    | {
+        name?: string | null;
+        text?: string | null;
+      }
+  >;
+  companies?: Array<
+    | string
+    | {
+        name?: string | null;
+        text?: string | null;
+      }
+  >;
 };
+
+function normalizeNameOrText(
+  value:
+    | string
+    | {
+        name?: string | null;
+        text?: string | null;
+      }
+    | undefined
+    | null,
+): string {
+  if (!value) return "";
+  if (typeof value === "string") return value;
+  return value.name || value.text || "";
+}
 
 function normalizeLocationName(
   location:
@@ -59,48 +96,6 @@ function normalizeLocationName(
   if (!location) return "";
   if (typeof location === "string") return location;
   return location.name || location.text || "";
-}
-
-function ensureAbsoluteImageUrl(path: string): string {
-  if (path.startsWith("http")) {
-    return path;
-  }
-  return `https://admin.hrpostingpartner.com/storage/${path.replace(/^\/+/, "")}`;
-}
-
-function resolveJobImageUrl(job: RawRelatedJob): string | null {
-  if (typeof job.image_path === "string" && job.image_path.trim().length > 0) {
-    return ensureAbsoluteImageUrl(job.image_path.trim());
-  }
-
-  if (Array.isArray(job.images) && job.images.length > 0) {
-    const first = job.images[0];
-    if (typeof first === "string" && first.trim().length > 0) {
-      return first.trim();
-    }
-    if (
-      first &&
-      typeof first === "object" &&
-      typeof first.image_path === "string" &&
-      first.image_path.trim().length > 0
-    ) {
-      return ensureAbsoluteImageUrl(first.image_path.trim());
-    }
-  }
-
-  return null;
-}
-
-function getPrimaryLocation(job: RawRelatedJob): string | null {
-  if (!Array.isArray(job.locations) || job.locations.length === 0) {
-    return null;
-  }
-
-  const firstWithValue = job.locations.find(
-    (loc) => normalizeLocationName(loc).trim().length > 0,
-  );
-  const label = normalizeLocationName(firstWithValue);
-  return label ? label : null;
 }
 
 function jobMatchesLocationKeyword(job: RawRelatedJob, keyword: string): boolean {
@@ -184,10 +179,20 @@ async function fetchJobsForSlider({
       id: job.id ?? job.slug!,
       slug: job.slug!,
       title: job.title || job.job_title || "View job",
-      shortDescription: job.short_description ?? "",
-      imageUrl: resolveJobImageUrl(job),
-      locationLabel: getPrimaryLocation(job),
+      roles: Array.isArray(job.roles)
+        ? job.roles.map((item) => normalizeNameOrText(item)).filter(Boolean)
+        : [],
+      experiences: Array.isArray(job.experiences)
+        ? job.experiences.map((item) => normalizeNameOrText(item)).filter(Boolean)
+        : [],
+      locations: Array.isArray(job.locations)
+        ? job.locations.map((loc) => normalizeLocationName(loc)).filter(Boolean)
+        : [],
+      companies: Array.isArray(job.companies)
+        ? job.companies.map((company) => normalizeNameOrText(company)).filter(Boolean)
+        : [],
       postedAt: job.posted_at ?? null,
+      expiryDate: job.expiry_date ?? null,
     }));
   } catch (error) {
     console.error("Failed to fetch jobs for slider", error);
@@ -436,12 +441,14 @@ export default async function Page({
   
     {job.images && <JobImageSlider images={job.images} title={job.job_title} />}
   
-    <div
-      className="prose max-w-full text-gray-800 break-words 
-               prose-img:mx-auto prose-img:w-full prose-img:rounded 
-               prose-a:underline prose-a:text-blue-600 prose-a:hover:text-blue-800"
-      dangerouslySetInnerHTML={{ __html: job.description ?? "" }}
-    />
+    <div className="mt-6 rounded-3xl border border-gray-100 bg-white p-6 shadow-[0_25px_60px_rgba(15,23,42,0.12)]">
+      <div
+        className="prose max-w-full text-gray-800 break-words 
+                 prose-img:mx-auto prose-img:w-full prose-img:rounded 
+                 prose-a:underline prose-a:text-blue-600 prose-a:hover:text-blue-800"
+        dangerouslySetInnerHTML={{ __html: job.description ?? "" }}
+      />
+    </div>
 
       {/* Disclaimer Section */}
       <div className="mt-6">

@@ -11,10 +11,12 @@ export type LocationSliderJob = {
   id: number | string;
   slug: string;
   title: string;
-  shortDescription?: string | null;
-  imageUrl?: string | null;
-  locationLabel?: string | null;
+  roles?: string[];
+  experiences?: string[];
+  locations?: string[];
+  companies?: string[];
   postedAt?: string | null;
+  expiryDate?: string | null;
 };
 
 type LocationJobsSliderProps = {
@@ -53,45 +55,52 @@ export default function LocationJobsSlider({
               href={`/classified-jobs/${job.slug}`}
               className="group block h-full overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
             >
-              {job.imageUrl ? (
-                <div className="relative h-44 w-full overflow-hidden">
-                  <img
-                    src={job.imageUrl}
-                    alt={job.title}
-                    className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
-                  />
-                </div>
-              ) : (
-                <div className="flex h-44 w-full items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 text-center text-blue-700">
-                  <span className="px-4 text-sm font-semibold">{job.title}</span>
-                </div>
-              )}
-
               <div className="flex h-full flex-col gap-3 p-4">
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 line-clamp-2">
-                    {job.title}
-                  </h3>
-                  {job.locationLabel && (
-                    <p className="mt-1 flex items-center text-sm text-gray-500">
-                      <span className="mr-1" aria-hidden="true">
-                        📍
-                      </span>
-                      {job.locationLabel}
-                    </p>
-                  )}
-                </div>
+                <h3 className="text-lg font-semibold text-gray-900 line-clamp-2">
+                  {job.title}
+                </h3>
 
-                <div className="mt-auto flex items-center justify-between text-xs text-gray-500">
+                {Array.isArray(job.roles) && job.roles.length > 0 && (
+                  <p className="text-sm text-gray-600">
+                    <span className="font-semibold text-gray-800">Roles:</span>{" "}
+                    {job.roles.join(", ")}
+                  </p>
+                )}
+
+                {Array.isArray(job.experiences) && job.experiences.length > 0 && (
+                  <p className="text-sm text-gray-600">
+                    <span className="font-semibold text-gray-800">Experiences:</span>{" "}
+                    {job.experiences.join(", ")}
+                  </p>
+                )}
+
+                {Array.isArray(job.locations) && job.locations.length > 0 && (
+                  <p className="text-sm text-gray-600">
+                    <span className="font-semibold text-gray-800">Locations:</span>{" "}
+                    {job.locations.join(", ")}
+                  </p>
+                )}
+
+                {Array.isArray(job.companies) && job.companies.length > 0 && (
+                  <p className="text-sm text-gray-600">
+                    <span className="font-semibold text-gray-800">Companies:</span>{" "}
+                    {job.companies.join(", ")}
+                  </p>
+                )}
+
+                <div className="mt-auto text-xs text-gray-500 space-y-1">
                   {job.postedAt && (
-                    <span>
+                    <p>
                       <span className="font-semibold text-gray-700">Posted:</span>{" "}
                       {job.postedAt}
-                    </span>
+                    </p>
                   )}
-                  <span className="inline-flex items-center gap-1 text-blue-600 font-semibold">
-                    View job &rarr;
-                  </span>
+                  {job.expiryDate && (
+                    <p>
+                      <span className="font-semibold text-gray-700">Expires:</span>{" "}
+                      {job.expiryDate}
+                    </p>
+                  )}
                 </div>
               </div>
             </Link>
