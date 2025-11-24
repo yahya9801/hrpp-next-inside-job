@@ -441,95 +441,95 @@ export default async function Page({
   
     {job.images && <JobImageSlider images={job.images} title={job.job_title} />}
   
-    <div className="mt-6 rounded-3xl border border-gray-100 bg-white p-6 shadow-[0_25px_60px_rgba(15,23,42,0.12)]">
+    <div className="mt-6 rounded-3xl border border-gray-100 bg-white p-6 shadow-[0_25px_60px_rgba(15,23,42,0.12)] space-y-4">
       <div
         className="prose max-w-full text-gray-800 break-words 
                  prose-img:mx-auto prose-img:w-full prose-img:rounded 
                  prose-a:underline prose-a:text-blue-600 prose-a:hover:text-blue-800"
         dangerouslySetInnerHTML={{ __html: job.description ?? "" }}
       />
+      <div>
+        <p className="font-semibold text-lg text-gray-900">Disclaimer</p>
+        <p className="text-sm text-gray-600 mt-2">
+          HR Posting Partner is not hiring for this position, we just post job ads for other companies. We urge you to check jobs yourself as well. Spread the word "Job ke liye, HRPostingPartner.com".
+        </p>
+      </div>
     </div>
 
-      {/* Disclaimer Section */}
-      <div className="mt-6">
-      <p className="font-semibold">Disclaimer:</p>
-      <p>
-        HR Posting Partner is not hiring for this position, we just post job ads for other companies. We urge you to check jobs yourself as well. Spread the word "Job ke liye, HRPostingPartner.com".
-      </p>
-    </div>
-  
-    <div className="mt-6 p-4 bg-gray-100 border border-gray-300 rounded-lg shadow-sm text-gray-700">
-      <p className="mt-2">
-        <strong>How to apply:</strong> Kindly click or right-click to copy and
-        paste the email or link provided above.
-      </p>
-    </div>
-    <div className="mt-6 p-4 bg-gray-100 border border-gray-300 rounded-lg shadow-sm text-gray-700 break-words">
-      <p className="font-semibold mb-2">Follow other platforms for jobs:</p>
-  
-      <p>
-        <span className="font-medium">Main WhatsApp Channel:</span>
-        <br />
-        <a
-          href="https://whatsapp.com/channel/0029VaRWeF7DDmFRZuX0Ww0K"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-600 underline hover:text-blue-800 break-all"
-        >
-          https://whatsapp.com/channel/0029VaRWeF7DDmFRZuX0Ww0K
-        </a>
-      </p>
-  
-      <p className="mt-2">
-        <span className="font-medium">Continuous Individual Job Ads  → HRPP 2.0 WAC:</span>
-        <br />
-        <a
-          href="https://whatsapp.com/channel/0029VbAxrB572WTxgZBSbp1I "
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-600 underline hover:text-blue-800 break-all"
-        >
-          https://whatsapp.com/channel/0029VbAxrB572WTxgZBSbp1I
-        </a>
-      </p>
-  
-      <p className="mt-2">
-        <span className="font-medium">LinkedIn Page:</span>
-        <br />
-        <a
-          href="https://www.linkedin.com/company/hr-posting-partner/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-600 underline hover:text-blue-800 break-all"
-        >
-          https://www.linkedin.com/company/hr-posting-partner/
-        </a>
-      </p>
-    </div>
-  
-    <div className="mt-6 p-4 bg-gray-100 border border-gray-300 rounded-lg shadow-sm text-gray-700">
-      <p>Want your job ad here?</p>
-      <p>
-        Contact:{" "}
-        <a
-          href="https://wa.me/923223379647"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-600 underline hover:text-blue-800"
-        >
-          +92 322 337 9647
-        </a>
-      </p>
-      <p>
-        Follow our{" "}
-        <a href="/terms-and-conditions" className="text-blue-600 underline">
-          terms and conditions
-        </a>
-        .
-      </p>
-      <p className="mt-2">
-        Note: Do not send your resume or contact us by phone.
-      </p>
+    <div className="mt-6 space-y-6">
+      <div className="rounded-3xl border border-gray-100 bg-white p-6 text-gray-700 shadow-[0_25px_60px_rgba(15,23,42,0.12)]">
+        <p className="text-base font-semibold text-gray-900">How to apply</p>
+        <p className="mt-2 text-sm">
+          Kindly click or right-click to copy and paste the email or link provided above.
+        </p>
+      </div>
+
+      <div className="rounded-3xl border border-gray-100 bg-white p-6 text-gray-700 shadow-[0_25px_60px_rgba(15,23,42,0.12)] break-words space-y-3">
+        <p className="text-base font-semibold text-gray-900">Follow other platforms for jobs</p>
+        <div className="space-y-2 text-sm">
+          <p>
+            <span className="font-medium">Main WhatsApp Channel:</span>
+            <br />
+            <a
+              href="https://whatsapp.com/channel/0029VaRWeF7DDmFRZuX0Ww0K"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 underline hover:text-blue-800 break-all"
+            >
+              https://whatsapp.com/channel/0029VaRWeF7DDmFRZuX0Ww0K
+            </a>
+          </p>
+          <p>
+            <span className="font-medium">Continuous Individual Job Ads → HRPP 2.0 WAC:</span>
+            <br />
+            <a
+              href="https://whatsapp.com/channel/0029VbAxrB572WTxgZBSbp1I "
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 underline hover:text-blue-800 break-all"
+            >
+              https://whatsapp.com/channel/0029VbAxrB572WTxgZBSbp1I
+            </a>
+          </p>
+          <p>
+            <span className="font-medium">LinkedIn Page:</span>
+            <br />
+            <a
+              href="https://www.linkedin.com/company/hr-posting-partner/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 underline hover:text-blue-800 break-all"
+            >
+              https://www.linkedin.com/company/hr-posting-partner/
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <div className="rounded-3xl border border-gray-100 bg-white p-6 text-gray-700 shadow-[0_25px_60px_rgba(15,23,42,0.12)] space-y-2">
+        <p className="text-base font-semibold text-gray-900">Want your job ad here?</p>
+        <p>
+          Contact:{" "}
+          <a
+            href="https://wa.me/923223379647"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline hover:text-blue-800"
+          >
+            +92 322 337 9647
+          </a>
+        </p>
+        <p>
+          Follow our{" "}
+          <a href="/terms-and-conditions" className="text-blue-600 underline">
+            terms and conditions
+          </a>
+          .
+        </p>
+        <p className="text-sm">
+          Note: Do not send your resume or contact us by phone.
+        </p>
+      </div>
     </div>
       {sliderSections.length > 0 && (
         <div className="mt-12 space-y-12">
