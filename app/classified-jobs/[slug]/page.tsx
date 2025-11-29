@@ -237,7 +237,7 @@ export default async function Page({
       description: "Fresh openings curated from every province.",
       fetchOptions: { limit: 5 },
       seeMoreHref: "/classified-jobs",
-      seeMoreLabel: "Browse all jobs",
+      seeMoreLabel: "See all roles",
     },
     {
       key: "latest-karachi",
@@ -249,7 +249,7 @@ export default async function Page({
         requiredLocationKeyword: "karachi",
       },
       seeMoreHref: { pathname: "/classified-jobs", query: { locations: "Karachi" } },
-      seeMoreLabel: "See more Karachi jobs",
+      seeMoreLabel: "See all Karachi roles",
     },
     {
       key: "latest-lahore",
@@ -261,7 +261,7 @@ export default async function Page({
         requiredLocationKeyword: "lahore",
       },
       seeMoreHref: { pathname: "/classified-jobs", query: { locations: "Lahore" } },
-      seeMoreLabel: "See more Lahore roles",
+      seeMoreLabel: "See all Lahore roles",
     },
     {
       key: "latest-islamabad",
@@ -273,7 +273,7 @@ export default async function Page({
         requiredLocationKeyword: "islamabad",
       },
       seeMoreHref: { pathname: "/classified-jobs", query: { locations: "Islamabad" } },
-      seeMoreLabel: "See Islamabad jobs",
+      seeMoreLabel: "See all Islamabad roles",
     },
     {
       key: "latest-rawalpindi",
@@ -285,7 +285,7 @@ export default async function Page({
         requiredLocationKeyword: "rawalpindi",
       },
       seeMoreHref: { pathname: "/classified-jobs", query: { locations: "Rawalpindi" } },
-      seeMoreLabel: "See Rawalpindi jobs",
+      seeMoreLabel: "See all Rawalpindi roles",
     },
     {
       key: "latest-faisalabad",
@@ -297,7 +297,7 @@ export default async function Page({
         requiredLocationKeyword: "faisalabad",
       },
       seeMoreHref: { pathname: "/classified-jobs", query: { locations: "Faisalabad" } },
-      seeMoreLabel: "See Faisalabad jobs",
+      seeMoreLabel: "See all Faisalabad roles",
     },
     {
       key: "latest-remote",
@@ -310,7 +310,7 @@ export default async function Page({
       },
       seeMoreHref:
         "https://www.hrpostingpartner.com/classified-jobs?start=&end=&locations=Remote&experience=",
-      seeMoreLabel: "See more remote jobs",
+      seeMoreLabel: "See all remote roles",
     },
     {
       key: "latest-freshers",
@@ -322,7 +322,7 @@ export default async function Page({
       },
       seeMoreHref:
         "https://www.hrpostingpartner.com/classified-jobs?start=&end=&locations=&experience=Fresh+Required",
-      seeMoreLabel: "Explore freshers jobs",
+      seeMoreLabel: "See all Fresher roles",
     },
   ];
 
