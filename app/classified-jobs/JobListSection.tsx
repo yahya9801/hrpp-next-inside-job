@@ -21,6 +21,7 @@ interface Job {
   images: string[];
   locations: string[];
   roles: string[];
+  companies:string[];
   experiences: string[];
 }
 
@@ -221,6 +222,15 @@ export default async function JobListSection({
                 className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full mr-2 mb-2"
               >
                 📍 {loc}
+              </span>
+            ))}
+
+            {job.companies?.map((company, idx) => (
+              <span
+                key={`${company}-${idx}`}
+                className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full mr-2 mb-2"
+              >
+                @{company}
               </span>
             ))}
 

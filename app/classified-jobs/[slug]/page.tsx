@@ -368,7 +368,7 @@ export default async function Page({
   if (!job) notFound();
 
   return (
-    <div className="max-w-5xl mx-auto px-1 py-10">
+    <div className="max-w-5xl mx-auto px-2 py-10">
       <SchemaMarkup schema={schema} />
       <div className="mb-4">
         <Link
@@ -442,6 +442,9 @@ export default async function Page({
     {job.images && <JobImageSlider images={job.images} title={job.job_title} />}
   
     <div className="mt-6 rounded-3xl border border-gray-100 bg-white p-6 shadow-[0_25px_60px_rgba(15,23,42,0.12)] space-y-4">
+      <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-800">
+        Please read the entire Job Ad before applying.
+      </div>
       <div
         className="prose max-w-full text-gray-800 break-words 
                  prose-img:mx-auto prose-img:w-full prose-img:rounded 
@@ -519,7 +522,8 @@ export default async function Page({
       </div>
 
       <div className="rounded-3xl border border-gray-100 bg-white p-6 text-gray-700 shadow-[0_25px_60px_rgba(15,23,42,0.12)] space-y-2">
-        <p className="text-base font-semibold text-gray-900">Want your job ad here?</p>
+        <p className="text-base font-semibold text-gray-900">Dear Recruiter,
+Want your job ad here? (Paid)</p>
         <p>
           Contact:{" "}
           <a
@@ -539,7 +543,7 @@ export default async function Page({
           .
         </p>
         <p className="text-sm">
-          Note: Do not send your resume or contact us by phone.
+          Note: Do not send your resume (Job Seekers) nor call us.
         </p>
       </div>
     </div>
