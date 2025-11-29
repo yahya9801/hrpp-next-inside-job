@@ -368,7 +368,7 @@ export default async function Page({
   if (!job) notFound();
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10">
+    <div className="max-w-5xl mx-auto px-4 py-10">
       <SchemaMarkup schema={schema} />
       <div className="mb-4">
         <Link
@@ -532,10 +532,13 @@ export default async function Page({
       </div>
     </div>
       {sliderSections.length > 0 && (
-        <div className="mt-12 space-y-12">
+        <div className="mt-12 space-y-8">
           {sliderSections.map((section) => (
-            <section key={section.key}>
-              <div className="mb-4">
+            <section
+              key={section.key}
+              className="rounded-3xl border border-gray-100 bg-white p-6 shadow-[0_25px_60px_rgba(15,23,42,0.12)] space-y-6"
+            >
+              <div className="space-y-1">
                 <h2 className="text-2xl font-semibold text-gray-900">
                   {section.title}
                 </h2>
