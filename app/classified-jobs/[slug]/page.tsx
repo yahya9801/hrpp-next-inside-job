@@ -368,7 +368,7 @@ export default async function Page({
   if (!job) notFound();
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-10">
+    <div className="max-w-5xl mx-auto px-1 py-10">
       <SchemaMarkup schema={schema} />
       <div className="mb-4">
         <Link
@@ -501,6 +501,18 @@ export default async function Page({
               className="text-blue-600 underline hover:text-blue-800 break-all"
             >
               https://www.linkedin.com/company/hr-posting-partner/
+            </a>
+          </p>
+          <p>
+            <span className="font-medium">For career and job seeking guidance:</span>
+            <br />
+            <a
+              href="https://whatsapp.com/channel/0029VbAxrB572WTxgZBSbp1I "
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 underline hover:text-blue-800 break-all"
+            >
+              https://www.hrpostingpartner.com/blogs
             </a>
           </p>
         </div>
