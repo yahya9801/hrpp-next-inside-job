@@ -35,7 +35,7 @@ export default function LocationJobsSlider({
     return null;
   }
 
-  const swiperRef = useRef<SwiperClass>();
+  const swiperRef = useRef<SwiperClass | null>(null);
 
   return (
     <div>
