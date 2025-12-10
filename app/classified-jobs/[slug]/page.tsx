@@ -454,7 +454,7 @@ export default async function Page({
       <div>
         <p className="font-semibold text-lg text-gray-900">Disclaimer</p>
         <p className="text-sm text-gray-600 mt-2">
-          HR Posting Partner is not hiring for this position, we just post job ads for other companies. We urge you to check jobs yourself as well. Spread the word "Job ke liye, HRPostingPartner.com".
+          HR Posting Partner is not hiring for this position, we just post job ads for other companies. We urge you to verify jobs yourself as well. Spread the word "Job ke liye, HRPostingPartner.com".
         </p>
       </div>
     </div>

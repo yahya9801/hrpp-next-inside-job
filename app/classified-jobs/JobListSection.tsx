@@ -1,7 +1,7 @@
 // app/jobs/JobListSection.tsx
 import Link from "next/link";
 import ShareButton from "@/components/ShareButton";
-import InFeedAdUnit from "@/components/InFeedAdUnit";
+// import InFeedAdUnit from "@/components/InFeedAdUnit";
 import JobViewTracker from "@/components/JobViewTracker";
 
 export const revalidate = 60;
@@ -255,7 +255,7 @@ export default async function JobListSection({
         </Link>
       ))}
       <div>
-        <InFeedAdUnit slotId="3398572260" />
+        {/* <InFeedAdUnit slotId="3398572260" /> */}
         </div>
       </div>
       ))}
