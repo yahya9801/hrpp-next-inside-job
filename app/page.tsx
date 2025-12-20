@@ -4,6 +4,7 @@ import RecruiterSection from '@/components/RecruiterSection';
 import HomePageSlider from '@/components/HomePageSlider';
 import ClassifiedJobsAd from '@/components/ClassifiedJobsAd';
 import AdUnit from '@/components/AdUnit';
+import LocationJobsSlider, { type LocationSliderJob } from '@/components/LocationJobsSlider';
 
 
 export const metadata = {
@@ -28,26 +29,96 @@ export const metadata = {
   },
 };
 
-export default function HomePage() {
+const EXPIRING_JOBS_ENDPOINT = 'https://admin.hrpostingpartner.com/api/jobs/expiring-soon';
+
+type ExpiringJobsResponse = {
+  data?: Array<{
+    id?: number | string;
+    title?: string;
+    slug?: string;
+    roles?: string[];
+    experiences?: string[];
+    locations?: string[];
+    companies?: string[];
+    posted_at?: string | null;
+    expiry_date?: string | null;
+  }>;
+};
+
+async function getExpiringJobs(): Promise<LocationSliderJob[]> {
+  try {
+    const response = await fetch(`${EXPIRING_JOBS_ENDPOINT}?limit=10`, { cache: 'no-store' });
+
+    if (!response.ok) {
+      throw new Error(`Expiring jobs request failed with status ${response.status}`);
+    }
+
+    const json = (await response.json()) as ExpiringJobsResponse;
+    const jobs = Array.isArray(json.data) ? json.data : [];
+    console.log(jobs)
+    return jobs
+      .slice(0, 10)
+      .filter((job) => job?.slug && job?.title)
+      .map((job) => ({
+        id: job?.id ?? job?.slug ?? '',
+        slug: job?.slug ?? '',
+        title: job?.title ?? '',
+        roles: job?.roles,
+        experiences: job?.experiences,
+        locations: job?.locations,
+        companies: job?.companies,
+        postedAt: job?.posted_at ?? null,
+        expiryDate: job?.expiry_date ?? null,
+      }));
+  } catch (error) {
+    console.error('Failed to load expiring jobs slider', error);
+    return [];
+  }
+}
+
+export default async function HomePage() {
+  const expiringJobs = await getExpiringJobs();
 
   return (
     <main className="flex flex-col">
       <Banner />
-      
+
       {/* Google Ad Banner */}
       {/* Google Ad Banner */}
-      <AdUnit slotId="9389960073"/>
+      <AdUnit slotId="9389960073" />
 
       <section className="px-4 md:px-12">
         <ClassifiedJobsAd />
         <JobCards />
       </section>
-      <AdUnit slotId="5491448797"/>
+      <AdUnit slotId="5491448797" />
       <RecruiterSection />
+      {expiringJobs.length > 0 && (
+        <section className="px-4 py-10 md:px-12">
+          <div className="mx-auto max-w-7xl">
+            <div className="rounded-2xl bg-white px-6 py-10 shadow-2xl sm:px-10">
+              <div className="mb-6 text-center">
+                <p className="text-xs font-semibold uppercase tracking-wider text-blue-600">
+                  Jobs expiring soon
+                </p>
+                <h2 className="text-3xl font-bold text-gray-900">Apply before they close</h2>
+                <p className="mt-2 text-base text-gray-600">
+                  Hand-picked opportunities that are closing in the next couple of days.
+                </p>
+              </div>
+              <LocationJobsSlider
+                jobs={expiringJobs}
+                seeMoreHref="/classified-jobs"
+                seeMoreLabel="View more classified jobs"
+              />
+            </div>
+          </div>
+        </section>
+      )}
       <section>
         <HomePageSlider />
       </section>
-      <AdUnit slotId="7411907265"/>
+      <AdUnit slotId="7411907265" />
     </main>
   );
 }
