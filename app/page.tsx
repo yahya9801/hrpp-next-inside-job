@@ -4,8 +4,13 @@ import RecruiterSection from '@/components/RecruiterSection';
 import HomePageSlider from '@/components/HomePageSlider';
 import ClassifiedJobsAd from '@/components/ClassifiedJobsAd';
 import AdUnit from '@/components/AdUnit';
-import LocationJobsSlider, { type LocationSliderJob } from '@/components/LocationJobsSlider';
-
+import LocationJobsSlider, {
+  type LocationSliderJob,
+} from '@/components/LocationJobsSlider';
+import {
+  defaultLocationSliderConfigs,
+  fetchJobsForSlider,
+} from '@/lib/locationJobs';
 
 export const metadata = {
   title: 'HR Posting Partner | Job Portal Pakistan',
@@ -55,7 +60,6 @@ async function getExpiringJobs(): Promise<LocationSliderJob[]> {
 
     const json = (await response.json()) as ExpiringJobsResponse;
     const jobs = Array.isArray(json.data) ? json.data : [];
-    console.log(jobs)
     return jobs
       .slice(0, 10)
       .filter((job) => job?.slug && job?.title)
@@ -78,6 +82,16 @@ async function getExpiringJobs(): Promise<LocationSliderJob[]> {
 
 export default async function HomePage() {
   const expiringJobs = await getExpiringJobs();
+  const locationSliderSections = (
+    await Promise.all(
+      defaultLocationSliderConfigs.map(async (config) => {
+        const fetched = await fetchJobsForSlider(config.fetchOptions);
+        const maxItems = config.fetchOptions.limit ?? 5;
+        const jobs = fetched.slice(0, maxItems);
+        return { ...config, jobs };
+      }),
+    )
+  ).filter((section) => section.jobs.length > 0);
 
   return (
     <main className="flex flex-col">
@@ -97,12 +111,9 @@ export default async function HomePage() {
         <section className="px-4 py-10 md:px-12">
           <div className="mx-auto max-w-7xl">
             <div className="rounded-2xl bg-white px-6 py-10 shadow-2xl sm:px-10">
-              <div className="mb-6 text-center">
-                <p className="text-xs font-semibold uppercase tracking-wider text-blue-600">
-                  Jobs expiring soon
-                </p>
-                <h2 className="text-3xl font-bold text-gray-900">Apply before they close</h2>
-                <p className="mt-2 text-base text-gray-600">
+              <div className="space-y-1">
+                <h2 className="text-2xl font-semibold text-gray-900">Jobs expiring soon</h2>
+                <p className="text-sm text-gray-500">
                   Hand-picked opportunities that are closing in the next couple of days.
                 </p>
               </div>
@@ -112,6 +123,30 @@ export default async function HomePage() {
                 seeMoreLabel="View more classified jobs"
               />
             </div>
+          </div>
+        </section>
+      )}
+      {locationSliderSections.length > 0 && (
+        <section className="px-4 pb-10 md:px-12">
+          <div className="mx-auto max-w-7xl space-y-8">
+            {locationSliderSections.map((section) => (
+              <div
+                key={section.key}
+                className="rounded-2xl bg-white px-6 py-10 shadow-2xl sm:px-10"
+              >
+                <div className="space-y-1">
+                  <h2 className="text-2xl font-semibold text-gray-900">{section.title}</h2>
+                  {section.description && (
+                    <p className="text-sm text-gray-500">{section.description}</p>
+                  )}
+                </div>
+                <LocationJobsSlider
+                  jobs={section.jobs}
+                  seeMoreHref={section.seeMoreHref}
+                  seeMoreLabel={section.seeMoreLabel}
+                />
+              </div>
+            ))}
           </div>
         </section>
       )}
