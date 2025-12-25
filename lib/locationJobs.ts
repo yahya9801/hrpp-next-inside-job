@@ -40,6 +40,7 @@ type RawSliderJob = {
 export type SliderFetchOptions = {
   limit?: number;
   locations?: string;
+  experience?: string;
   requiredLocationKeyword?: string;
   additionalQuery?: Record<string, string | undefined>;
 };
@@ -95,6 +96,7 @@ function jobMatchesLocationKeyword(job: RawSliderJob, keyword: string): boolean 
 export async function fetchJobsForSlider({
   limit = 5,
   locations,
+  experience,
   requiredLocationKeyword,
   additionalQuery = {},
 }: SliderFetchOptions = {}): Promise<LocationSliderJob[]> {
@@ -106,6 +108,10 @@ export async function fetchJobsForSlider({
 
   if (locations) {
     params.set('locations', locations);
+  }
+
+  if (experience) {
+    params.set('experience', experience);
   }
 
   Object.entries(additionalQuery).forEach(([key, value]) => {
@@ -228,5 +234,28 @@ export const defaultLocationSliderConfigs: SliderSectionConfig[] = [
     },
     seeMoreHref: { pathname: '/classified-jobs', query: { locations: 'Faisalabad' } },
     seeMoreLabel: 'See all Faisalabad roles',
+  },
+  {
+    key: 'latest-remote',
+    title: 'Latest Remote Jobs for Pakistan',
+    description: 'Work-from-home roles curated for Pakistani talent.',
+    fetchOptions: {
+      limit: 5,
+      locations: 'Remote',
+      requiredLocationKeyword: 'remote',
+    },
+    seeMoreHref: '/remote-jobs-for-pakistan',
+    seeMoreLabel: 'See all remote roles',
+  },
+  {
+    key: 'latest-freshers',
+    title: "Latest Fresher's Jobs/Internships",
+    description: 'Entry-level openings and internships across Pakistan.',
+    fetchOptions: {
+      limit: 5,
+      experience: 'Fresh Required',
+    },
+    seeMoreHref: '/jobs-internships-for-non-experienced',
+    seeMoreLabel: 'See all Fresher roles',
   },
 ];
