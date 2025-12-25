@@ -20,7 +20,7 @@ const OpenPlatformsFull = () => (
 
     {/* Social Buttons */}
     <div className="flex flex-col sm:flex-row justify-center items-center gap-6 mb-4">
-      <a
+      {/* <a
         href="https://www.facebook.com/groups/644836695155098"
         target="_blank"
         rel="noopener noreferrer"
@@ -28,7 +28,7 @@ const OpenPlatformsFull = () => (
       >
         <FaFacebook className="text-3xl mr-2" />
         Click to Open Facebook Group Platform
-      </a>
+      </a> */}
 
       <a
         href="https://www.linkedin.com/groups/13176545"

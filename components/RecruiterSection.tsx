@@ -94,7 +94,7 @@ const RecruiterSection = () => {
               If your job ad doesn't meet our T&C, post freely on our open platforms:
             </p>
             <div className="flex flex-wrap gap-6 items-center justify-center lg:justify-start mb-4">
-              <a
+              {/* <a
                 href="https://www.facebook.com/groups/644836695155098"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -102,7 +102,7 @@ const RecruiterSection = () => {
               >
                 <FaFacebook className="text-3xl mr-2" />
                 Facebook Group
-              </a>
+              </a> */}
               <a
                 href="https://www.linkedin.com/groups/13176545"
                 target="_blank"
