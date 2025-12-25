@@ -38,6 +38,7 @@ const TermsAndConditions = () => (
           <li>Personal/Unofficial email domains such as @gmail.com, @hotmail.com, or @ymail.com are not considered official and are not allowed.</li>
           <li>Walk-in interview job ads may include a WhatsApp number but must not use personal/unofficial email addresses.</li>
           <li>Walk-in interview postings must clearly state the interview location, date, and time. Incomplete ads will not be approved.</li>
+          <li>Company names in each job ads are preferred</li>
         </ul>
       </div>
 

@@ -60,14 +60,14 @@ const SpecialPresence = () => (
       </p>
     </div>
 
-    {/* Rates Grid */}
-    <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-      {["12:30 PM", "06:00 PM", "07:00 PM", "08:00 PM"].map((time, idx) => (
-        <div key={idx} className="rounded-2xl border border-gray-300 shadow text-center py-6 px-2">
-          <div className="text-xl font-semibold mb-2">{time}</div>
-          <div className="text-blue-700 text-2xl font-bold">PKR 500</div>
-        </div>
-      ))}
+    {/* LinkedIn rate info */}
+    <div className="mt-8 rounded-2xl border border-gray-200 bg-gray-50 p-6 text-center shadow">
+      <p className="text-xl font-semibold text-gray-900">
+        All job ads on LinkedIn cost PKR 500 per job ad post.
+      </p>
+      <p className="mt-2 text-sm text-gray-600">
+        Your job ad will be its own unique post, not grouped with others, so it gets more visibility.
+      </p>
     </div>
   </section>
 );

@@ -269,7 +269,7 @@ export default function Footer() {
 
       {/* Copyright */}
       <div className="bg-gray-800 border-t border-gray-700 text-center py-4 text-sm text-gray-400">
-        © 2025 HR Posting Partner. All rights reserved.
+        © 2026 HR Posting Partner. All rights reserved
       </div>
     </footer>
   );

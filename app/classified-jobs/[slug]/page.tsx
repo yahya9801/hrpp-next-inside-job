@@ -462,9 +462,31 @@ export default async function Page({
     <div className="mt-6 space-y-6">
       <div className="rounded-3xl border border-gray-100 bg-white p-6 text-gray-700 shadow-[0_25px_60px_rgba(15,23,42,0.12)]">
         <p className="text-base font-semibold text-gray-900">How to apply</p>
-        <p className="mt-2 text-sm">
-          Kindly click or right-click to copy and paste the email or link provided above.
-        </p>
+        <div className="mt-2 space-y-3 text-sm text-gray-600">
+          <p>
+            Our website does not have an &quot;Apply&quot; button. Each job post already includes the application
+            details provided by the hiring company, such as an email address, WhatsApp number, or application link.
+          </p>
+          <p>To apply, please follow these steps:</p>
+          <ol className="list-decimal space-y-3 pl-5">
+            <li>
+              <p className="font-semibold text-gray-900">Direct click (recommended on mobile only)</p>
+              <p>Tap the email address, WhatsApp number, or link in the job post to start your application.</p>
+            </li>
+            <li>
+              <p className="font-semibold text-gray-900">
+                Copy &amp; paste (if clicking doesn&apos;t work, recommended on mobile or PC)
+              </p>
+              <ul className="list-disc space-y-1 pl-5">
+                <li>On mobile: tap and hold the email, WhatsApp number, or link.</li>
+                <li>On PC: right-click the email, WhatsApp number, or link.</li>
+                <li>Select copy, then:</li>
+                <li>For emails: paste it into Gmail, Yahoo Mail, Outlook, or any email service.</li>
+                <li>For links: paste it into your browser (Chrome, Firefox, etc.) to open the application page.</li>
+              </ul>
+            </li>
+          </ol>
+        </div>
       </div>
 
       <div className="rounded-3xl border border-gray-100 bg-white p-6 text-gray-700 shadow-[0_25px_60px_rgba(15,23,42,0.12)] break-words space-y-3">
@@ -522,7 +544,7 @@ export default async function Page({
       </div>
 
       <div className="rounded-3xl border border-gray-100 bg-white p-6 text-gray-700 shadow-[0_25px_60px_rgba(15,23,42,0.12)] space-y-2">
-        <p className="text-base font-semibold text-gray-900">Dear Recruiter,
+        <p className="text-base font-semibold text-gray-900">Dear Recruiter, </p><p>
 Want your job ad here? (Paid)</p>
         <p>
           Contact:{" "}
