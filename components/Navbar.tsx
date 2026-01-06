@@ -4,9 +4,14 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+const TYPING_TEXT = 'Job ke liye, HRPostingPartner.com';
+const TYPING_SPEED = 120;
+const PAUSE_DURATION = 2000;
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [typedText, setTypedText] = useState('');
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -40,14 +45,47 @@ const Navbar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    let index = 0;
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    const type = () => {
+      setTypedText(TYPING_TEXT.slice(0, index + 1));
+      index += 1;
+
+      if (index === TYPING_TEXT.length) {
+        timeoutId = setTimeout(() => {
+          setTypedText('');
+          index = 0;
+          timeoutId = setTimeout(type, TYPING_SPEED);
+        }, PAUSE_DURATION);
+      } else {
+        timeoutId = setTimeout(type, TYPING_SPEED);
+      }
+    };
+
+    timeoutId = setTimeout(type, TYPING_SPEED);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
+
   return (
     <header className="bg-white shadow-md">
       <nav className="container mx-auto flex items-center justify-between p-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center">
-          <Image src="/images/hrrp_logo.png" alt="HR Posting Partner" width={40} height={40} />
-          <span className="ml-2 text-lg font-semibold">HR Posting Partner</span>
-        </Link>
+        <div className="flex items-center space-x-4">
+          <Link href="/" className="flex items-center">
+            <Image src="/images/hrrp_logo.png" alt="HR Posting Partner" width={40} height={40} />
+            <span className="ml-2 text-lg font-semibold">HR Posting Partner</span>
+          </Link>
+          <p
+            className="hidden sm:flex items-center text-sm text-gray-600 font-medium whitespace-nowrap"
+            aria-live="polite"
+          >
+            {typedText}
+            <span className="ml-1 h-5 w-px bg-gray-600 animate-pulse" aria-hidden="true"></span>
+          </p>
+        </div>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex space-x-8">
