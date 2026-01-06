@@ -120,7 +120,7 @@ export default async function HomePage() {
               <LocationJobsSlider
                 jobs={expiringJobs}
                 seeMoreHref="/classified-jobs"
-                seeMoreLabel="View more classified jobs"
+                seeMoreLabel="See all roles"
               />
             </div>
           </div>

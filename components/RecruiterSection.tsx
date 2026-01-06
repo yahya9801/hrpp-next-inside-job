@@ -118,7 +118,7 @@ const RecruiterSection = () => {
               <ul className="list-disc pl-6 text-base space-y-1 text-left">
                 <li>Post unlimited jobs</li>
                 <li>No restrictions on job ads</li>
-                <li>Anonymous posts supported</li>
+                {/* <li>Anonymous posts supported</li> */}
                 <li>Connect with job seekers directly</li>
                 <li>Expand your reach through our network</li>
               </ul>
@@ -130,7 +130,7 @@ const RecruiterSection = () => {
         </div>
       </div>
 
-      {/* Section 4: Advertise with Us */}
+      {/* Section 4: Advertise with Us
       <div className="max-w-7xl mx-auto py-4">
         <div className="flex flex-col-reverse lg:flex-row items-center bg-white shadow-2xl rounded-2xl p-6 sm:p-10 gap-8">
           <div className="lg:w-2/3 text-center lg:text-left space-y-4">
@@ -164,7 +164,7 @@ const RecruiterSection = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

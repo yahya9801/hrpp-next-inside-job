@@ -46,7 +46,7 @@ export default async function JobsInIslamabadRawalpindiPage() {
   const sliderSections = [
     {
       key: 'islamabad',
-      title: 'Latest jobs in Islamabad',
+      title: 'Latest Jobs in Islamabad',
       description: 'Government and private roles in the capital.',
       seeMoreHref: { pathname: '/classified-jobs', query: { locations: 'Islamabad' } },
       seeMoreLabel: 'See all Islamabad roles',
@@ -54,7 +54,7 @@ export default async function JobsInIslamabadRawalpindiPage() {
     },
     {
       key: 'rawalpindi',
-      title: 'Latest jobs in Rawalpindi',
+      title: 'Latest Jobs in Rawalpindi',
       description: 'Fresh listings from the Pindi region.',
       seeMoreHref: { pathname: '/classified-jobs', query: { locations: 'Rawalpindi' } },
       seeMoreLabel: 'See all Rawalpindi roles',

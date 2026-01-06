@@ -47,7 +47,7 @@ const OpenPlatformsFull = () => (
       <ul className="list-disc pl-6 text-base space-y-1">
         <li>Post as many jobs as you like.</li>
         <li>No restriction on Job Ads.</li>
-        <li>Anonymous post on Open Facebook Group platform.</li>
+        {/* <li>Anonymous post on Open Facebook Group platform.</li> */}
         <li>Connecting Recruiters with Job Seekers.</li>
         <li>Our reach will be your reach.</li>
       </ul>

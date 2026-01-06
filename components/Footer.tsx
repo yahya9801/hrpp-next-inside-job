@@ -17,7 +17,7 @@ export default function Footer() {
   const [isLoadingCategories, setIsLoadingCategories] = useState(true);
   const services = [
     { name: 'Classified Jobs', href: '/classified-jobs' },
-    { name: 'Advertise with Us', href: '/advertise-with-us' },
+    // { name: 'Advertise with Us', href: '/advertise-with-us' },
     { name: 'Special Presence Job Ads', href: '/special-presence-job-ads' },
     { name: 'Open Platforms', href: '/open-platforms' },
   ];

@@ -233,7 +233,7 @@ export default async function Page({
   const sliderConfigs: SliderSectionConfig[] = [
     {
       key: "latest-pk",
-      title: "Latest jobs in Pakistan",
+      title: "Latest Jobs in Pakistan",
       description: "Fresh openings curated from every province.",
       fetchOptions: { limit: 5 },
       seeMoreHref: "/classified-jobs",
@@ -241,7 +241,7 @@ export default async function Page({
     },
     {
       key: "latest-karachi",
-      title: "Latest jobs in Karachi",
+      title: "Latest Jobs in Karachi",
       description: "Hot roles hiring right now in Karachi.",
       fetchOptions: {
         limit: 5,
@@ -253,7 +253,7 @@ export default async function Page({
     },
     {
       key: "latest-lahore",
-      title: "Latest jobs in Lahore",
+      title: "Latest Jobs in Lahore",
       description: "Opportunities across Lahore’s top companies.",
       fetchOptions: {
         limit: 5,
@@ -265,7 +265,7 @@ export default async function Page({
     },
     {
       key: "latest-islamabad",
-      title: "Latest jobs in Islamabad",
+      title: "Latest Jobs in Islamabad",
       description: "Government and private roles in the capital.",
       fetchOptions: {
         limit: 5,
@@ -277,7 +277,7 @@ export default async function Page({
     },
     {
       key: "latest-rawalpindi",
-      title: "Latest jobs in Rawalpindi",
+      title: "Latest Jobs in Rawalpindi",
       description: "Fresh listings from the Pindi region.",
       fetchOptions: {
         limit: 5,
@@ -289,7 +289,7 @@ export default async function Page({
     },
     {
       key: "latest-faisalabad",
-      title: "Latest jobs in Faisalabad",
+      title: "Latest Jobs in Faisalabad",
       description: "Manufacturing and tech roles in Faisalabad.",
       fetchOptions: {
         limit: 5,

@@ -95,9 +95,9 @@ const Navbar = () => {
             )}
           </div>
 
-          <Link href="/advertise-with-us" className="text-gray-700 hover:text-blue-600 font-semibold">
+          {/* <Link href="/advertise-with-us" className="text-gray-700 hover:text-blue-600 font-semibold">
             Advertise with Us
-          </Link>
+          </Link> */}
           <Link href="/contact-us" className="text-gray-700 hover:text-blue-600 font-semibold">
             Contact Us
           </Link>
