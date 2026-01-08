@@ -628,7 +628,8 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
                       )}
                       {shouldRenderAd && (
                         
-                          <AdUnit slotId="8015069158" />
+                          // <AdUnit slotId="8015069158" />
+                          ""
                        
                       )}
                     </Fragment>
