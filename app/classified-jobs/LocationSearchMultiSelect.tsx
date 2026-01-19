@@ -34,8 +34,11 @@ export default function LocationSearchMultiSelect() {
   }, [searchParams]);
 
   useEffect(() => {
-    // Immediate fetch on mount (initial load)
     fetchLocations("");
+  }, []); 
+  useEffect(() => {
+    // Immediate fetch on mount (initial load)
+    // fetchLocations("");
 
     // Debounced fetch on search input change
     if (debounceTimer) clearTimeout(debounceTimer);
