@@ -43,7 +43,7 @@ const TermsAndConditions = () => (
       </div>
 
       {/* Sponsored Ads */}
-      <div>
+      {/* <div>
         <h2 className="font-semibold text-lg sm:text-xl mb-2">
           For Sponsored Ads:
         </h2>
@@ -53,7 +53,7 @@ const TermsAndConditions = () => (
           <li>Any illegal business discovered later will be treated similarly.</li>
           <li>Team HRPP does initial scrutiny, but users are advised to remain cautious.</li>
         </ul>
-      </div>
+      </div> */}
 
       {/* Open Platforms */}
       <div>

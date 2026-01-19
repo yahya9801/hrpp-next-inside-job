@@ -244,7 +244,7 @@ export const defaultLocationSliderConfigs: SliderSectionConfig[] = [
       locations: 'Remote',
       requiredLocationKeyword: 'remote',
     },
-    seeMoreHref: '/remote-jobs-for-pakistan',
+    seeMoreHref: { pathname: '/classified-jobs', query: { locations: 'Remote' } },
     seeMoreLabel: 'See all remote roles',
   },
   {
@@ -255,7 +255,7 @@ export const defaultLocationSliderConfigs: SliderSectionConfig[] = [
       limit: 5,
       experience: 'Fresh Required',
     },
-    seeMoreHref: '/jobs-internships-for-non-experienced',
+    seeMoreHref: { pathname: '/classified-jobs', query: { experience: "Fresh Required", } },
     seeMoreLabel: 'See all Fresher roles',
   },
 ];

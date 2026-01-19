@@ -13,18 +13,13 @@ const AboutUs = () => (
     {/* Description */}
     <div className="space-y-4 text-gray-800 text-base sm:text-lg mb-8">
       <p>
-        HR Posting Partner is an HR-based marketing business providing Job Ads
-        services along with marketing for other companies or businesses. We are
-        here to help you boost your Job Ad and/or Sponsored Ad.
+        HR Posting Partner (HRPP) is a modern job portal and hiring network built to connect employers with real talent across Pakistan.
       </p>
       <p>
-        Also, we are continuously striving to help job seekers in finding career
-        opportunities.
+        We provide a centralized platform where employers can publish job opportunities, while our strong social media presence ensures those jobs reach a wide, active audience of professionals, graduates, and job seekers nationwide.
       </p>
       <p>
-        We are one of the best platforms for job opportunities in Pakistan as we
-        are one of Pakistan’s fastest-growing Talent Attraction and People
-        Interaction platforms.
+        Unlike traditional job boards that only display listings, HRPP combines technology with reach — allowing every job posted on our platform to be seen, shared, and discovered across multiple digital channels.
       </p>
     </div>
 

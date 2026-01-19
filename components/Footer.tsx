@@ -40,14 +40,8 @@ export default function Footer() {
     { name: 'Jobs in Rawalpindi', href: '/jobs-in-islamabad-rawalpindi' },
     { name: 'Jobs in Islamabad', href: '/jobs-in-islamabad-rawalpindi' },
     { name: 'Jobs in Faisalabad', href: '/jobs-in-faisalabad' },
-    {
-      name: 'Remote Jobs',
-      href: 'https://www.hrpostingpartner.com/classified-jobs?start=&end=&locations=Remote&experience=',
-    },
-    {
-      name: "Fresher's Jobs/Internships",
-      href: 'https://www.hrpostingpartner.com/classified-jobs?start=&end=&locations=&experience=Fresh+Required',
-    },
+    { name: 'Remote Jobs',href: '/remote-jobs-for-pakistan' },
+    { name: "Fresher's Jobs/Internships", href: '/jobs-internships-for-non-experienced' },
   ];
 
   useEffect(() => {
