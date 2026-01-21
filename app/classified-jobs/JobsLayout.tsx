@@ -3,6 +3,7 @@
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useState, Suspense } from "react";
 import DatePickerInit from "./DatePickerInit";
+import ExpiryDatePickerInit from "./ExpiryDatePickerInit";
 import LocationSearchMultiSelect from "./LocationSearchMultiSelect";
 import ExperienceFilter from "./ExperienceFilter";
 
@@ -138,6 +139,19 @@ export default function JobsLayout({
                       <input type="hidden" name="end" id="end-date" />
                     </div>
 
+                    <div>
+                      <p className="font-medium mb-2">Expiry Date:</p>
+                      <input
+                        type="text"
+                        id="expiry-date-range"
+                        className="w-full border rounded px-2 py-1 text-sm"
+                        placeholder="Select range"
+                        readOnly
+                      />
+                      <input type="hidden" name="expiry_start" id="expiry-start-date" />
+                      <input type="hidden" name="expiry_end" id="expiry-end-date" />
+                    </div>
+
                     {/* Location Filter */}
                     <LocationSearchMultiSelect />
 
@@ -234,7 +248,13 @@ export default function JobsLayout({
         </div>
 
         {/* Litepicker only when filters shown */}
-        {showFilters && <DatePickerInit />}
+       {showFilters && (
+        <>
+          <DatePickerInit />
+          <ExpiryDatePickerInit />
+        </>
+      )}
+
       </Suspense>
     </div>
   );
