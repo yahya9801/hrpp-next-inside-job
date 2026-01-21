@@ -80,6 +80,16 @@ async function getExpiringJobs(): Promise<LocationSliderJob[]> {
   }
 }
 
+const formatDate = (date) => date.toISOString().split("T")[0];
+
+const today = new Date();
+const twoDaysAgo = new Date();
+twoDaysAgo.setDate(today.getDate() - 2);
+
+const seeMoreHref = `/classified-jobs?expiry_start=${formatDate(
+  twoDaysAgo
+)}&expiry_end=${formatDate(today)}`;
+
 export default async function HomePage() {
   const expiringJobs = await getExpiringJobs();
   const locationSliderSections = (
@@ -119,8 +129,8 @@ export default async function HomePage() {
               </div>
               <LocationJobsSlider
                 jobs={expiringJobs}
-                seeMoreHref="/classified-jobs"
-                seeMoreLabel="See all roles"
+                seeMoreHref={seeMoreHref}
+                seeMoreLabel="See all Expiring roles"
               />
             </div>
           </div>
