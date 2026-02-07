@@ -460,7 +460,7 @@ export default async function Page({
     </div>
 
     <div className="mt-6 space-y-6">
-      <div className="rounded-3xl border border-gray-100 bg-white p-6 text-gray-700 shadow-[0_25px_60px_rgba(15,23,42,0.12)]">
+      {/* <div className="rounded-3xl border border-gray-100 bg-white p-6 text-gray-700 shadow-[0_25px_60px_rgba(15,23,42,0.12)]">
         <p className="text-base font-semibold text-gray-900">How to apply</p>
         <div className="mt-2 space-y-3 text-sm text-gray-600">
           <p>
@@ -487,7 +487,81 @@ export default async function Page({
             </li>
           </ol>
         </div>
+      </div> */}
+
+
+      <div className="rounded-3xl border border-gray-100 bg-white p-6 text-gray-700 shadow-[0_25px_60px_rgba(15,23,42,0.12)]">
+  <p className="text-base font-semibold text-gray-900">How to apply</p>
+
+  <div className="mt-2 space-y-4 text-sm text-gray-600">
+    <p>
+      Our website does not have an &quot;Apply&quot; button. Each job post already includes
+      the application details provided by the hiring company, such as an email address,
+      WhatsApp number, or application link.
+    </p>
+
+    <p>To apply, please follow these steps:</p>
+
+    <ol className="list-decimal space-y-4 pl-5">
+      <li>
+        <p className="font-semibold text-gray-900">
+          Direct click <span className="font-normal text-gray-500">(recommended on mobile)</span>
+        </p>
+        <p>
+          Tap the email address, WhatsApp number, or link in the job post to start your application.
+        </p>
+      </li>
+
+      <li>
+        <p className="font-semibold text-gray-900">
+          Copy &amp; paste <span className="font-normal text-gray-500">(mobile or PC)</span>
+        </p>
+        <ul className="list-disc space-y-1 pl-5">
+          <li>On mobile: tap and hold the email, WhatsApp number, or link.</li>
+          <li>On PC: right-click the email, WhatsApp number, or link.</li>
+          <li>Select <strong>Copy</strong>, then:</li>
+          <li>
+            For emails: paste it into Gmail, Yahoo Mail, Outlook, or any email service.
+          </li>
+          <li>
+            For links: paste it into your browser (Chrome, Firefox, etc.) to open the application page.
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+    {/* Video Guide Section */}
+    <div className="mt-6">
+      <p className="font-semibold text-gray-900">For more guidance</p>
+      <p className="mt-1">
+        Watch our step-by-step video guide on how to use our website.
+      </p>
+
+      {/* Responsive YouTube Embed */}
+      <div className="mt-3 aspect-video w-full overflow-hidden rounded-xl border">
+        <iframe
+          className="h-full w-full"
+          src="https://www.youtube.com/embed/videoseries?list=PLG4_jlkQNY3c4e18HVMezltMtlgbk3_ty"
+          title="How to use Our Website"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
       </div>
+
+      {/* Optional clickable link */}
+      <a
+        href="https://youtube.com/playlist?list=PLG4_jlkQNY3c4e18HVMezltMtlgbk3_ty"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-2 inline-block text-sm font-medium text-blue-600 hover:underline"
+      >
+        Open playlist on YouTube →
+      </a>
+    </div>
+  </div>
+</div>
+
 
       <div className="rounded-3xl border border-gray-100 bg-white p-6 text-gray-700 shadow-[0_25px_60px_rgba(15,23,42,0.12)] break-words space-y-3">
         <p className="text-base font-semibold text-gray-900">Follow other platforms for jobs</p>
