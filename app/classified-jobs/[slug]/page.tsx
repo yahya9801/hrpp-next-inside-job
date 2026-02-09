@@ -546,9 +546,9 @@ export default async function Page({
     {/* Video Guide Section */}
     <div className="mt-6">
       <p className="font-semibold text-gray-900">For more guidance</p>
-      <p className="mt-1">
+      {/* <p className="mt-1">
         Watch our step-by-step video guide on how to use our website.
-      </p>
+      </p> */}
 
       {/* Responsive YouTube Embed */}
       {/* <div className="mt-3 aspect-video w-full overflow-hidden rounded-xl border">
