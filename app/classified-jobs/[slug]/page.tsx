@@ -565,13 +565,15 @@ export default async function Page({
       <div className="mt-3 aspect-video w-full overflow-hidden rounded-xl border">
         <iframe
           className="h-full w-full"
-          src="https://www.youtube.com/watch?v=C9-CmwiUmno"
-          title="How to apply for Jobs"
+          src="https://www.youtube.com/embed/C9-CmwiUmno?si=vZu1bbzKjuCLzMUu"
+          title="YouTube video player"
           frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen
         />
       </div>
+
 
 
       {/* Optional clickable link */}
