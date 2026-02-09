@@ -457,6 +457,19 @@ export default async function Page({
           HR Posting Partner is not hiring for this position, we just post job ads for other companies. We urge you to verify jobs yourself as well. Spread the word "Job ke liye, HRPostingPartner.com".
         </p>
       </div>
+      <div className="mt-6">
+        <h2 className="text-lg font-semibold">How to Use Our Website</h2>
+
+        <a
+          href="https://youtube.com/playlist?list=PLG4_jlkQNY3c4e18HVMezltMtlgbk3_ty"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm text-blue-600 hover:underline break-all"
+        >
+          https://youtube.com/playlist?list=PLG4_jlkQNY3c4e18HVMezltMtlgbk3_ty
+        </a>
+      </div>
+
     </div>
 
     <div className="mt-6 space-y-6">
@@ -538,7 +551,7 @@ export default async function Page({
       </p>
 
       {/* Responsive YouTube Embed */}
-      <div className="mt-3 aspect-video w-full overflow-hidden rounded-xl border">
+      {/* <div className="mt-3 aspect-video w-full overflow-hidden rounded-xl border">
         <iframe
           className="h-full w-full"
           src="https://www.youtube.com/embed/videoseries?list=PLG4_jlkQNY3c4e18HVMezltMtlgbk3_ty"
@@ -547,17 +560,22 @@ export default async function Page({
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />
+      </div> */}
+
+      <div className="mt-3 aspect-video w-full overflow-hidden rounded-xl border">
+        <iframe
+          className="h-full w-full"
+          src="https://www.youtube.com/watch?v=C9-CmwiUmno"
+          title="How to apply for Jobs"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
       </div>
 
+
       {/* Optional clickable link */}
-      <a
-        href="https://youtube.com/playlist?list=PLG4_jlkQNY3c4e18HVMezltMtlgbk3_ty"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-2 inline-block text-sm font-medium text-blue-600 hover:underline"
-      >
-        Open playlist on YouTube →
-      </a>
+      
     </div>
   </div>
 </div>
