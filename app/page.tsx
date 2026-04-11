@@ -15,7 +15,7 @@ import {
 export const metadata = {
   title: 'HR Posting Partner | Job Portal Pakistan',
   description:
-    'HR Posting Partner helps job seekers in Pakistan find the latest jobs and recruiters hire the best talent along with advertising opportunity for businesses and companies. Post jobs free and search hundreds of listings today.',
+    'HR Posting Partner, a leading job portal in Pakistan connecting employers with top talent and helping professionals discover the right career opportunities.',
   keywords: [
     'jobs in Pakistan',
     'HR Posting Partner',
@@ -27,8 +27,8 @@ export const metadata = {
   openGraph: {
     title: 'HR Posting Partner | Job Portal Pakistan',
     description:
-      'Find the latest jobs in Pakistan and hire the best talent with HR Posting Partner. Post jobs free, search listings, and advertise your business today.',
-    url: 'https://yourdomain.com', // replace with your domain
+      'Find the latest jobs in Pakistan and hire the best talent with HR Posting Partner.',
+    url: 'https://hrpostingpartner.com', // replace with your domain
     siteName: 'HR Posting Partner',
     type: 'website',
   },

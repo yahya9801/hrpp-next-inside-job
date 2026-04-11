@@ -29,10 +29,7 @@ const AboutUs = () => (
         Mission Statement
       </h4>
       <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
-        “To empower job seekers and employers in Pakistan by providing a
-        reliable, accessible, and free job posting platform that bridges
-        opportunities with talent, fostering career growth and organizational
-        success.”
+        “To empower job seekers and employers in Pakistan by providing a reliable, accessible job posting platform that bridges opportunities with talent, fostering career growth and organizational success.”
       </p>
     </div>
 
